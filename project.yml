@@ -1,0 +1,46 @@
+name: sttts
+options:
+  bundleIdPrefix: com.chiachang_su
+  deploymentTarget:
+    macOS: "26.0"
+    iOS: "26.0"
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    SDKROOT: auto
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "sttts uses on-device Apple Speech to transcribe your voice."
+    GENERATE_INFOPLIST_FILE: YES
+    INFOPLIST_KEY_UILaunchScreen_Generation: YES
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_HARDENED_RUNTIME[sdk=macosx*]: YES
+
+schemes:
+  sttts:
+    build:
+      targets:
+        sttts: all
+
+targets:
+  sttts:
+    type: application
+    supportedDestinations: [macOS, iOS]
+    settings:
+      base:
+        "CODE_SIGN_STYLE[sdk=macosx*]": Manual
+        "CODE_SIGN_IDENTITY[sdk=macosx*]": "-"
+    sources:
+      - path: App
+    dependencies:
+      - sdk: AVFoundation.framework
+      - sdk: AVFAudio.framework
+      - sdk: AVKit.framework
+      - sdk: Speech.framework
+        weak: true
+      - sdk: FoundationModels.framework
+        weak: true
+
